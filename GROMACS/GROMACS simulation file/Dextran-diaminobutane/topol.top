@@ -1,0 +1,18 @@
+; forcefield
+
+#include "amber99sb.ff/forcefield.itp"
+#include "./EPG.itp"
+#include "./DDA.itp"
+#include "amber99sb.ff/tip3p.itp"
+#include "amber99sb.ff/ions.itp"
+
+[ system ]
+water in water
+
+[ molecules ]
+;molecule name number
+EPG       1 
+DDA       1 
+
+SOL         6800
+NA               14

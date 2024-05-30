@@ -1,0 +1,18 @@
+; forcefield
+
+#include "amber99sb.ff/forcefield.itp"
+#include "./EPG.itp"
+#include "./L14.itp"
+#include "amber99sb.ff/tip3p.itp"
+#include "amber99sb.ff/ions.itp"
+
+[ system ]
+water in water
+
+[ molecules ]
+;molecule name number
+EPG       1 
+L14       1 
+
+SOL         6791
+NA               14

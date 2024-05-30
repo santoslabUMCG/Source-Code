@@ -1,0 +1,26 @@
+;energy minimization mdp file
+define = -DFLEXIBLE ;传递给.top文件预处理器设定， -DFELEXIBLE指水分子不被约束成刚性
+integrator = l-bfgs ; 决定这个mdp文件要干什么,详见 P78
+nsteps = 50000  ; 能量最小化最多做多少步
+emtol  = 500.0  ; 能量最小化到多少认为收敛
+emstep = 0.001   ; steep法最大步长
+; 输出频率控制
+nstxout   = 1000 ; 每多少步输出一次坐标到trr文件
+nstlog    = 1000  ; 每多少步输出一次信息到log文件
+nstenergy = 500  ; 每多少步输出一次能量信息到edr文件
+; 周期性设定
+pbc = xyz       ; 在三个坐标系均使用周期性设定
+; 邻居列表生成方式 how to find neighbouring molecules
+cutoff-scheme            = Verlet     ;  默认参数，只能用于PBC设定
+coulombtype              = PME        ;  推荐参数
+rcoulomb                 = 1.0        ;
+vdwtype                  = Cut-off
+rvdw                     = 1.0
+DispCorr                 = EnerPres
+;
+constraints              = none
+;
+Tcoupl  = V-rescale
+tau_t   = 0.2
+tc_grps = system
+ref_t   = 0.0

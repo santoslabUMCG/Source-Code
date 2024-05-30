@@ -1,0 +1,45 @@
+; 平衡相mdp文件
+define = -DFLEXIBLE
+integrator = md
+dt         = 0.001  ; 1 fs per step
+nsteps     = 1000000 ; 1 * 1 000 000 = 1000 ps = 1 ns
+comm-grps  = system ; 对哪个组进行消除整体运动，默认为system
+energygrps = system
+; 输出参数设置
+nstxout = 1000
+nstvout = 1000
+nstfout = 1000
+nstlog  = 1000
+nstenergy = 1000
+nstxout-compressed = 1000 ; 每多少步输出一次坐标参数到xtc文件
+compressed-x-grps  = system  ; 输出到xtc文件里的group，默认为system
+; 退火参数设置
+annealing = periodic          ; 退火方式，周期性退火 
+annealing_npoints = 4         ; 退火点数目，即温度设置点数目
+annealing_time = 0 100 150 250 ; 与上面的参数相对应，即在什么时间退火，总体模拟时间1ns，每次退火200ps，故总共进行5此循环退火
+annealing_temp = 0 370 370 0  ; 每次退火点的温度是什么  
+; 周期性设定，静电设定，范德华设定
+pbc = xyz
+cutoff-scheme = Verlet
+coulombtype   = PME
+rcoulomb      = 1.0
+vdwtype       = cut-off
+rvdw          = 1.0
+DispCorr      = EnerPres
+; 热浴设定
+Tcoupl  = V-rescale  ; r热浴参数，目前最好的就是V-rescale
+tau_t   = 0.2        ; 控温时间常数
+tc_grps = system     ; 整体控温
+ref_t   = 298.15     ; 参考温度
+; 压浴设定，对于NPT运算必须设定，NVT则不需要
+Pcoupl     = Berendsen  ; 压浴方法，平衡相推荐使用Berendsen
+pcoupltype = isotropic  ; 控压方式，各项同性控压
+tau_p = 0.5             ; 控压时间常数
+ref_p = 1.01325             ; 参考压力
+compressibility = 4.5e-5  ;可压缩系数，水系统可选此数值
+; 初速度生成设定
+gen_vel  = no           ; 无初速度
+gen_temp = 298.5       ; 初速度相对应温度
+gen_seed = -1           ; 随机种子，默认为-1，代表赝随机数
+; 约束
+constraints = none

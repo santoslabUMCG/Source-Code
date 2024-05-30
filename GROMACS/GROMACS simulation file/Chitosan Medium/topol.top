@@ -1,0 +1,18 @@
+; forcefield
+
+#include "amber99sb.ff/forcefield.itp"
+#include "./EPG.itp"
+#include "./CSM.itp"
+#include "amber99sb.ff/tip3p.itp"
+#include "amber99sb.ff/ions.itp"
+
+[ system ]
+water in water
+
+[ molecules ]
+;molecule name number
+EPG       1 
+CSM       1 
+
+SOL         6619
+CL               24

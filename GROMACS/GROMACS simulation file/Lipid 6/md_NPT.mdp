@@ -1,0 +1,45 @@
+; 生成相MDP文件
+define = -DFLEXIBLE
+integrator = md
+dt         = 0.002   ; ps
+nsteps     = 500000 ; 2 fs * 500 000 = 10 ns
+comm-grps  = system   ; 对哪个组消除整体移动
+energygrps = EPG LP6  ; 哪个group的短程非键作用能写入到edr文件中
+;
+nstxout = 500
+nstvout = 500
+nstfout = 500
+nstlog  = 1000
+nstenergy = 1000
+nstxout-compressed = 1000
+compressed-x-grps  = system
+; 周期性设定
+pbc = xyz
+cutoff-scheme = Verlet
+coulombtype   = PME
+rcoulomb      = 1.0
+vdwtype       = cut-off
+rvdw          = 1.0
+DispCorr      = EnerPres
+; 退火设定
+annealing = single
+annealing_npoints = 2
+annealing_time = 0 500 ;ps
+annealing_temp = 0 298.15
+; 热浴
+Tcoupl  = V-rescale
+tau_t   = 0.2
+tc_grps = system
+ref_t   = 298.15
+; 压浴
+Pcoupl     = parrinello-rahman
+pcoupltype = isotropic
+tau_p = 2.0
+ref_p = 1.01325
+compressibility = 4.5e-5
+; 初始速度设置
+gen_vel  = no
+gen_temp = 298.15
+gen_seed = -1
+; 
+constraints = hbonds
